@@ -9,9 +9,9 @@ from setuptools import (setup, find_packages)
 import glob
 
 setup(
-    name = 'ns-struc',
+    name = 'ns-struc-modes',
     version = '0.0',
-    url = 'https://github.com/landryp/ns-struc',
+    url = 'https://github.com/landryp/ns-struc-modes',
     author = __author__,
     author_email = 'philippe.landry@ligo.org',
     description = __description__,
