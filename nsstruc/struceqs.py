@@ -22,9 +22,20 @@ def mass(r,y,*args): # definition of the mass
 	
 	p = y[props.index('R')] # p in units of g/cm^3
 	mu = args[0] # mu in units of g/cm^3	
-		
+
 	return 4.*np.pi*r**2*mu(p) 
+
+
+def psi(r,y,*args): # definition of psi
 	
+	props = args[-1]
+	
+	p = y[props.index('R')] # p in units of g/cm^3
+	m = y[props.index('M')] # m in units of cm*c^2/G
+
+	return ((2.*m)+8.np.pi*r**3*p) / (r*(r-2.*m*G/c**2)*(G/c**2))
+
+
 def baryonmass(r,y,*args): # definition of the baryonic mass
 	
 	props = args[-1]
