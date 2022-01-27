@@ -26,7 +26,7 @@ def mass(r,y,*args): # definition of the mass
 	return 4.*np.pi*r**2*mu(p) 
 
 
-def psi(r,y,*args): # definition of psi
+def derivativeofpsi(r,y,*args): # definition of psi
 	
 	props = args[-1]
 	
@@ -34,6 +34,17 @@ def psi(r,y,*args): # definition of psi
 	m = y[props.index('M')] # m in units of cm*c^2/G
 
 	return ((2.*m)+8.np.pi*r**3*p) / (r*(r-2.*m*G/c**2)*(G/c**2))
+
+def W(r,y,*args): #radial perturbation equation 
+	
+	props = args[-1]
+	
+	psi = y[props.index('H')] # psi is dimensionless
+	m = y[props.index('M')] # m in units of cm*c^2/G
+
+	
+	return cs2i*(omega**2*r**2*(r-2.*m*G/c**2)**(-0.5)*e**(psi)*V + derivativeofpsi*W) - 2*(2+1)*((r-2.*m*G/c**2)**(-0.5))*V
+	
 
 
 def baryonmass(r,y,*args): # definition of the baryonic mass
