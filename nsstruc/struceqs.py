@@ -44,8 +44,16 @@ def W(r,y,*args): #radial perturbation equation
 
 	
 	return cs2i*(omega**2*r**2*(r-2.*m*G/c**2)**(-0.5)*e**(psi)*V + derivativeofpsi*W) - 2*(2+1)*((r-2.*m*G/c**2)**(-0.5))*V
-	
 
+def V(r,y,*args): #f-mode perturbation equation
+	
+	props = args[-1]
+	
+	psi = y[props.index('H')] # psi is dimensionless
+	m = y[props.index('M')] # m in units of cm*c^2/G
+	
+	return (V*psi) - (W*(2*(2+1)*((r-2.*m*G/c**2)**(-0.5))))/r**2
+	
 
 def baryonmass(r,y,*args): # definition of the baryonic mass
 	
@@ -155,3 +163,11 @@ def calcobs(vals,props): # calculate NS properties at stellar surface in desired
 		return 1e-45*(omegaR/(3.+omegaR))*c**2*vals[0]**3/(2.*G) # MoI in 10^45 g cm^2
 
 	return {'R': Rkm,'M': MMsun,'Lambda': Lambda1,'I': MoI, 'Mb': MbMsun}	
+
+def  calcobs(vals,props):
+	
+	psi = y[props.index('H')] # psi is dimensionless
+	R = vals[0]
+	M = vals[props.index('M')+1]
+
+return  psic = 0.5 * log*(1-2*G*M/(c**2*R)) - psi
