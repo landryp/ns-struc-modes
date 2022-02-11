@@ -33,7 +33,7 @@ def derivativeofpsi(r,y,*args): # definition of psi
 	p = y[props.index('R')] # p in units of g/cm^3
 	m = y[props.index('M')] # m in units of cm*c^2/G
 
-	return ((2.*m)+8.np.pi*r**3*p) / (r*(r-2.*m*G/c**2)*(G/c**2))
+	return ((2.*m)+8.*np.pi*r**3*p) / (r*(r-2.*m*G/c**2)*(G/c**2))
 
 def W(r,y,*args): #radial perturbation equation 
 	
