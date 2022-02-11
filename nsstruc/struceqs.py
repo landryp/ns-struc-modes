@@ -155,6 +155,14 @@ def calcobs(vals,props): # calculate NS properties at stellar surface in desired
 		k2el = 0.5*(etaR-2.-4.*C/fR)/(RdFdr-F*(etaR+3.-4.*C/fR)) # gravitoelectric quadrupole Love number
 	
 		return (2./3.)*(k2el/C**5)
+	
+	def  PsiC(vals,props):
+	
+		psi = y[props.index('H')+1] # psi is dimensionless
+		R = vals[0]
+		M = vals[props.index('M')+1]
+
+		return  0.5 * log(1-2*G*M/(c**2*R)) - psi
 		
 	def MoI(vals):
 	
@@ -164,10 +172,4 @@ def calcobs(vals,props): # calculate NS properties at stellar surface in desired
 
 	return {'R': Rkm,'M': MMsun,'Lambda': Lambda1,'I': MoI, 'Mb': MbMsun}	
 
-def  calcobs(vals,props):
 	
-	psi = y[props.index('H')] # psi is dimensionless
-	R = vals[0]
-	M = vals[props.index('M')+1]
-
-return  psic = 0.5 * log*(1-2*G*M/(c**2*R)) - psi
