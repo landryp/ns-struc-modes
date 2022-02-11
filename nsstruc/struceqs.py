@@ -33,7 +33,7 @@ def derivativeofpsi(r,y,*args): # definition of psi
 	p = y[props.index('R')] # p in units of g/cm^3
 	m = y[props.index('M')] # m in units of cm*c^2/G
 
-	return ((2.*m)+8.*np.pi*r**3*p) / (r*(r-2.*m*G/c**2)*(G/c**2))
+	return (m+4.*np.pi*r**3*p) / (r*(r-2.*m*G/c**2)*(G/c**2))
 
 def W(r,y,*args): #radial perturbation equation 
 	
@@ -43,7 +43,7 @@ def W(r,y,*args): #radial perturbation equation
 	m = y[props.index('M')] # m in units of cm*c^2/G
 
 	
-	return cs2i*(omega**2*r**2*(r-2.*m*G/c**2)**(-0.5)*e**(psi)*V + derivativeofpsi*W) - 2*(2+1)*((r-2.*m*G/c**2)**(-0.5))*V
+	return cs2i*(c**(-2)*omega**2*r**2*(r-2.*m*G/c**2)**(-0.5)*e**(-psi)*V + 0.5*derivativeofpsi*W) - (2*(2+1)*((r-2.*m*G/c**2)**(-0.5))*V)*r**0.5
 
 def V(r,y,*args): #f-mode perturbation equation
 	
@@ -52,7 +52,7 @@ def V(r,y,*args): #f-mode perturbation equation
 	psi = y[props.index('H')] # psi is dimensionless
 	m = y[props.index('M')] # m in units of cm*c^2/G
 	
-	return (V*psi) - (W*(2*(2+1)*((r-2.*m*G/c**2)**(-0.5))))/r**2
+	return (V*((m+4.*np.pi*r**3*p) /  (r*(r-2.*m*G/c**2)*(G/c**2)))) - (W*((r-2.*m*G/c**2)**(-0.5)))/r**1.5
 	
 
 def baryonmass(r,y,*args): # definition of the baryonic mass
@@ -98,8 +98,8 @@ def slowrot(r,y,*args): # slow rotation equation
 	return -(1./r)*(omega*(omega+3.)-P*(omega+4.))	
 
 def eqsdict(): # dictionary linking NS properties with corresponding equation of stellar structure
-
-	return {'R': hydro,'M': mass,'Lambda': equad,'I': slowrot,'Mb': baryonmass}
+	
+	return {'R': hydro,'M': mass,'Lambda': equad,'I': slowrot,'Mb': baryonmass, 'H': derivativeofpsi, 'omega': W, 'v': V}
 
 # INITIAL CONDITIONS
 
