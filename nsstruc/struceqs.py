@@ -110,8 +110,11 @@ def initconds(pc,muc,cs2ic,rhoc,stp,props): # initial conditions for integration
 	Lambdac = 2.+4.*np.pi*G*stp**2*(9.*pc+13.*muc+3.*(pc+muc)*cs2ic)/(21.*c**2)
 	omegac = 0.+16.*np.pi*G*stp**2*(pc+muc)/(5.*c**2)
 	mbc = 4.*np.pi*stp**3*rhoc/3.
+	psic = -0.25
+	Wc = 1e-14*stp**3
+	Vc = -(1e-14*stp**2) / 2
 	
-	return {'R': Pc,'M': mc,'Lambda': Lambdac,'I': omegac, 'Mb': mc}
+	return {'R': Pc,'M': mc,'Lambda': Lambdac,'I': omegac, 'Mb': mc, 'H': psic, 'omega': Wc, 'v': Vc}
 
 # SURFACE VALUES
 
