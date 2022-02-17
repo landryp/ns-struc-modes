@@ -44,7 +44,7 @@ def W(r,y,*args): #radial perturbation equation
 	cs2i = args[1] # sound speed squared in units of c^2
 	omega = 1000
 	
-	return cs2i*(c**(-2)*omega**2*r**2*(r-2.*m*G/c**2)**(-0.5)*e**(-psi)*V + 0.5*derivativeofpsi*W) - (2*(2+1)*((r-2.*m*G/c**2)**(-0.5))*V)*r**0.5
+	return cs2i*(c**(-2)*omega**2*r**2*(r-2.*m*G/c**2)**(-0.5)*np.exp(-psi)*V + 0.5*derivativeofpsi*W) - (2*(2+1)*((r-2.*m*G/c**2)**(-0.5))*V)*r**0.5
 
 def V(r,y,*args): #f-mode perturbation equation
 	
