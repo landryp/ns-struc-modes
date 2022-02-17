@@ -3,6 +3,7 @@
 import numpy as np
 from scipy.special import hyp2f1
 from .constants import *
+omega = 1000
 
 # DEFINE TOV AND PERTURBATION EQUATIONS
 
@@ -45,7 +46,6 @@ def W(r,y,*args): #radial perturbation equation
 	w = y[props.index('omega')]
 	v = y[props.index('v')]
 	cs2i = args[1] # sound speed squared in units of c^2
-	omega = 1000
 	
 	return cs2i(p)*(c**(-2)*omega**2*r**2*(r-2.*m*G/c**2)**(-0.5)*np.exp(-psi)*v + 0.5*((m+4.*np.pi*r**3*p) / (r*(r-2.*m*G/c**2)*(G/c**2)))*w) - (2*(2+1)*((r-2.*m*G/c**2)**(-0.5))*v)*r**0.5
 
@@ -92,17 +92,17 @@ def equad(r,y,*args): # gravitoelectric quadrupole tidal perturbation
 
 def slowrot(r,y,*args): # slow rotation equation
 	
-	props = args[-1]
+	#props = args[-1]
 	
-	p = y[props.index('R')] # p in units of g/cm^3
-	m = y[props.index('M')] # m in units of cm*c^2/G
-	omega = y[props.index('I')] # log derivative of frame-dragging function
-	mu = args[0] # mu in units of g/cm^3
+	#p = y[props.index('R')] # p in units of g/cm^3
+	#m = y[props.index('M')] # m in units of cm*c^2/G
+	#omega = y[props.index('I')] # log derivative of frame-dragging function
+	#mu = args[0] # mu in units of g/cm^3
 	
-	f = 1.-2.*G*m/(c**2*r)	
-	P = 4.*np.pi*G*r**2*(mu(p)+p)/(c**2*f)
+	#f = 1.-2.*G*m/(c**2*r)	
+	#P = 4.*np.pi*G*r**2*(mu(p)+p)/(c**2*f)
 		
-	return -(1./r)*(omega*(omega+3.)-P*(omega+4.))	
+	return 0
 
 def eqsdict(): # dictionary linking NS properties with corresponding equation of stellar structure
 	
