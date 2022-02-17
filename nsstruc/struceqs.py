@@ -39,12 +39,13 @@ def W(r,y,*args): #radial perturbation equation
 	
 	props = args[-1]
 	
+	p = y[props.index('R')] # p in units of g/cm^3
 	psi = y[props.index('H')] # psi is dimensionless
 	m = y[props.index('M')] # m in units of cm*c^2/G
 	cs2i = args[1] # sound speed squared in units of c^2
 	omega = 1000
 	
-	return cs2i*(c**(-2)*omega**2*r**2*(r-2.*m*G/c**2)**(-0.5)*np.exp(-psi)*V + 0.5*derivativeofpsi*W) - (2*(2+1)*((r-2.*m*G/c**2)**(-0.5))*V)*r**0.5
+	return cs2i*(c**(-2)*omega**2*r**2*(r-2.*m*G/c**2)**(-0.5)*np.exp(-psi)*V + 0.5*((m+4.*np.pi*r**3*p) / (r*(r-2.*m*G/c**2)*(G/c**2)))*W) - (2*(2+1)*((r-2.*m*G/c**2)**(-0.5))*V)*r**0.5
 
 def V(r,y,*args): #f-mode perturbation equation
 	
