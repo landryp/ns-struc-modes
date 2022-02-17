@@ -173,6 +173,17 @@ def calcobs(vals,props): # calculate NS properties at stellar surface in desired
 		M = vals[props.index('M')+1]
 
 		return  0.5 * log(1-2*G*M/(c**2*R)) - psi
+	
+	def  BC(vals,props):
+	
+		psi = y[props.index('H')+1] # psi is dimensionless
+		R = vals[0]
+		M = vals[props.index('M')+1]
+		WR = vals[props.index('omega')+1]
+		VR = vals[props.index('v')+1]
+		dpsidr = (M) / (R*(R-2.*M*G/c**2)*(G/c**2))
+
+		return c**-2*omega**2*R**2*(1-2*G*M/(c**2*R))**(-0.5)*np.exp(-(psi))*VR+0.5*(dpsidr)*WR
 		
 	def MoI(vals):
 	
@@ -180,6 +191,8 @@ def calcobs(vals,props): # calculate NS properties at stellar surface in desired
 	
 		return 1e-45*(omegaR/(3.+omegaR))*c**2*vals[0]**3/(2.*G) # MoI in 10^45 g cm^2
 
-	return {'R': Rkm,'M': MMsun,'Lambda': Lambda1,'I': MoI, 'Mb': MbMsun}	
+	return {'R': Rkm,'M': MMsun,'Lambda': Lambda1,'I': MoI, 'Mb': MbMsun, 'H': PsiC, 'omega': BC, 'v': 0.}
+
+}	
 
 	
