@@ -191,8 +191,6 @@ def calcobs(vals,props): # calculate NS properties at stellar surface in desired
 	
 		return 1e-45*(omegaR/(3.+omegaR))*c**2*vals[0]**3/(2.*G) # MoI in 10^45 g cm^2
 
-	return {'R': Rkm,'M': MMsun,'Lambda': Lambda1,'I': MoI, 'Mb': MbMsun, 'H': PsiC, 'omega': BC, 'v': 0.}
-
-}	
+	return {'R': Rkm,'M': MMsun,'Lambda': Lambda1,'I': MoI, 'Mb': MbMsun, 'H': PsiC, 'omega': BC, 'v': 0.}	
 
 	
