@@ -47,7 +47,9 @@ def W(r,y,*args): #radial perturbation equation
 	v = y[props.index('v')]
 	cs2i = args[1] # sound speed squared in units of c^2
 	
-	return cs2i(p)*(c**(-2)*omega**2*r**2*(r-2.*m*G/c**2)**(-0.5)*np.exp(-psi)*v + 0.5*((m+4.*np.pi*r**3*p) / (r*(r-2.*m*G/c**2)*(G/c**2)))*w) - (2*(2+1)*((r-2.*m*G/c**2)**(-0.5))*v)*r**0.5
+	return 0
+	
+	#return cs2i(p)*(c**(-2)*omega**2*r**2*(r-2.*m*G/c**2)**(-0.5)*np.exp(-psi)*v + 0.5*((m+4.*np.pi*r**3*p) / (r*(r-2.*m*G/c**2)*(G/c**2)))*w) - (2*(2+1)*((r-2.*m*G/c**2)**(-0.5))*v)*r**0.5
 
 def V(r,y,*args): #f-mode perturbation equation
 	
@@ -59,7 +61,9 @@ def V(r,y,*args): #f-mode perturbation equation
 	w = y[props.index('omega')]
 	v = y[props.index('v')]
 	
-	return (v*((m+4.*np.pi*r**3*p) /  (r*(r-2.*m*G/c**2)*(G/c**2)))) - (w*((r-2.*m*G/c**2)**(-0.5)))/r**1.5
+	return 0
+	
+	#return (v*((m+4.*np.pi*r**3*p) /  (r*(r-2.*m*G/c**2)*(G/c**2)))) - (w*((r-2.*m*G/c**2)**(-0.5)))/r**1.5
 	
 
 def baryonmass(r,y,*args): # definition of the baryonic mass
