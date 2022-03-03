@@ -3,7 +3,7 @@
 import numpy as np
 from scipy.special import hyp2f1
 from .constants import *
-omega = 1000
+omega = 2000
 
 # DEFINE TOV AND PERTURBATION EQUATIONS
 
