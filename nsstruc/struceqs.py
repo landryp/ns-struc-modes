@@ -34,7 +34,7 @@ def derivativeofpsi(r,y,*args): # definition of psi
 	p = y[props.index('R')] # p in units of g/cm^3
 	m = y[props.index('M')] # m in units of cm*c^2/G
 
-	return (m+4.*np.pi*r**3*p) / (r*(r-2.*m*G/c**2)*(G/c**2))
+	return (m+4.*np.pi*r**3*p) / (r*(r-2.*m*G/c**2)*(c**2/G))
 
 def W(r,y,*args): #radial perturbation equation 
 	
@@ -47,7 +47,7 @@ def W(r,y,*args): #radial perturbation equation
 	v = y[props.index('v')]
 	cs2i = args[1] # sound speed squared in units of c^2
 	
-	return cs2i(p)*(c**(-2)*omega**2*r**2*(1-2.*m*G/(c**2*r))**(-0.5)*np.exp(-psi)*v + 0.5*((m+4.*np.pi*r**3*p) / (r*(r-2.*m*G/c**2)*(G/c**2)))*w) - (2*(2+1)*((1-2.*m*G/(c**2*r))**(-0.5))*v)
+	return cs2i(p)*(c**(-2)*omega**2*r**2*(1-2.*m*G/(c**2*r))**(-0.5)*np.exp(-psi)*v + 0.5*((m+4.*np.pi*r**3*p) / (r*(r-2.*m*G/c**2)*(c**2/G)))*w) - (2*(2+1)*((1-2.*m*G/(c**2*r))**(-0.5))*v)
 
 def V(r,y,*args): #f-mode perturbation equation
 	
@@ -61,7 +61,7 @@ def V(r,y,*args): #f-mode perturbation equation
 	
 	return 0 
 	
-	#return (v*((m+4.*np.pi*r**3*p) /  (r*(r-2.*m*G/c**2)*(G/c**2)))) - (w*((r-2.*m*G/c**2)**(-0.5)))/r**1.5
+	#return (v*((m+4.*np.pi*r**3*p) /  (r*(r-2.*m*G/c**2)*(c**2/G)))) - (w*((r-2.*m*G/c**2)**(-0.5)))/r**1.5
 	
 
 def baryonmass(r,y,*args): # definition of the baryonic mass
@@ -183,7 +183,7 @@ def calcobs(vals,props): # calculate NS properties at stellar surface in desired
 		M = vals[props.index('M')+1]
 		WR = vals[props.index('omega')+1]
 		VR = vals[props.index('v')+1]
-		dpsidr = (M) / (R*(R-2.*M*G/c**2)*(G/c**2))
+		dpsidr = (M) / (R*(R-2.*M*G/c**2)*(c**2/G))
 
 		return c**-2*omega**2*R**2*(1-2*G*M/(c**2*R))**(-0.5)*np.exp(-(psi))*VR+0.5*(dpsidr)*WR
 		
