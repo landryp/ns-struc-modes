@@ -58,10 +58,8 @@ def V(r,y,*args): #f-mode perturbation equation
 	m = y[props.index('M')] # m in units of cm*c^2/G
 	w = y[props.index('omega')]
 	v = y[props.index('v')]
-	
-	return 0 
-	
-	#return (v*((m+4.*np.pi*r**3*p) /  (r*(r-2.*m*G/c**2)*(c**2/G)))) - (w*((r-2.*m*G/c**2)**(-0.5)))/r**1.5
+		
+	return (v*((m+4.*np.pi*r**3*p) /  (r*(r-2.*m*G/c**2)*(c**2/G)))) - (w*((r-2.*m*G/c**2)**(-0.5)))/r**1.5
 	
 
 def baryonmass(r,y,*args): # definition of the baryonic mass
