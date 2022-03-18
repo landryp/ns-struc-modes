@@ -176,9 +176,9 @@ def calcobs(vals,props): # calculate NS properties at stellar surface in desired
 	
 	def  BC(vals):
 	
-		psi = 0.5 * np.log(1-2*G*M/(c**2*R)) # psi is dimensionless
 		R = vals[0]
 		M = vals[props.index('M')+1]
+		psi = 0.5 * np.log(1-2*G*M/(c**2*R)) # psi is dimensionless
 		WR = vals[props.index('omega')+1]
 		VR = vals[props.index('v')+1]
 		dpsidr = (M) / (R*(R-2.*M*G/c**2)*(c**2/G))
