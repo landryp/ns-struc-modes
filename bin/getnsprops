@@ -23,6 +23,8 @@ parser.add_option('-d', '--dir', default='./eos/', help='path to directory housi
 parser.add_option('-o', '--outdir', default='./dat/', help='path to output directory, DEFAULT=./dat/', metavar='./dat/')
 parser.add_option('-t', '--tag', default='macro-', help='tag for output data file, DEFAULT=macro-', metavar='macro-')
 parser.add_option('-v', '--verbose', action='store_true', default=False, help='toggle verbose output, DEFAULT=False', metavar='False')
+parser.add_option('-z', '--omega', default=3000, help='passes the omega value', metavar='3000')
+parser.add_option('-c', '--psic', default=-0.25, help='passes the psic value', metavar='=0.25')
 
 opts, args = parser.parse_args()
 eosnames = str(args[0]).split(',')
@@ -39,6 +41,8 @@ indir = str(opts.dir)
 outdir = str(opts.outdir)
 tag = str(opts.tag)
 verb = opts.verbose
+omega = float(opts.omega) 
+psic = float(opts.psic)
 
 # CALCULATE NS PROPERTIES FOR EACH EOS
 
@@ -76,7 +80,7 @@ for eosname in eosnames:
 	if verb == True: print 'Start at central density {0} g/cm^3'.format(rhocs[0])
 	for rhoc in rhocs: # compute macroscopic properties for star of each central density
 	
-		macro = tov([mu,P,cs2i,Rho],rhoc,props,stp,numpts,maxr,tol)
+		macro = tov([mu,P,cs2i,Rho],rhoc,psic,omega,props,stp,numpts,maxr,tol)
 		properties[i] = [item for List in [[rhoc],macro] for item in List]
 		i = i+1
 
