@@ -3,7 +3,6 @@
 import numpy as np
 from scipy.special import hyp2f1
 from .constants import *
-omega = 3000
 
 # DEFINE TOV AND PERTURBATION EQUATIONS
 
@@ -39,6 +38,7 @@ def derivativeofpsi(r,y,*args): # definition of psi
 def W(r,y,*args): #radial perturbation equation 
 	
 	props = args[-1]
+	omega = args[-2]
 	
 	p = y[props.index('R')] # p in units of g/cm^3
 	psi = y[props.index('H')] # psi is dimensionless
@@ -110,14 +110,13 @@ def eqsdict(): # dictionary linking NS properties with corresponding equation of
 
 # INITIAL CONDITIONS
 
-def initconds(pc,muc,cs2ic,rhoc,stp,props): # initial conditions for integration of eqs of stellar structure
+def initconds(pc,muc,cs2ic,rhoc,psic,stp,props): # initial conditions for integration of eqs of stellar structure
 
 	Pc = pc - 2.*np.pi*G*stp**2*(pc+muc)*(3.*pc+muc)/(3.*c**2)
 	mc = 4.*np.pi*stp**3*muc/3.
 	Lambdac = 2.+4.*np.pi*G*stp**2*(9.*pc+13.*muc+3.*(pc+muc)*cs2ic)/(21.*c**2)
 	omegac = 0.+16.*np.pi*G*stp**2*(pc+muc)/(5.*c**2)
 	mbc = 4.*np.pi*stp**3*rhoc/3.
-	psic = -0.25
 	Wc = 1e-14*stp**3
 	Vc = -(1e-14*stp**2) / 2
 	
@@ -125,7 +124,7 @@ def initconds(pc,muc,cs2ic,rhoc,stp,props): # initial conditions for integration
 
 # SURFACE VALUES
 
-def calcobs(vals,props): # calculate NS properties at stellar surface in desired units, given output surficial values from integrator
+def calcobs(vals,omega,props): # calculate NS properties at stellar surface in desired units, given output surficial values from integrator
 
 	def Rkm(vals): # R in km
 	
