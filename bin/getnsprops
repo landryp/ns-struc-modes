@@ -24,7 +24,7 @@ parser.add_option('-d', '--dir', default='./eos/', help='path to directory housi
 parser.add_option('-o', '--outdir', default='./dat/', help='path to output directory, DEFAULT=./dat/', metavar='./dat/')
 parser.add_option('-t', '--tag', default='macro-', help='tag for output data file, DEFAULT=macro-', metavar='macro-')
 parser.add_option('-v', '--verbose', action='store_true', default=False, help='toggle verbose output, DEFAULT=False', metavar='False')
-parser.add_option('-z', '--omega', default=3000, help='passes the omega value', metavar='3000')
+parser.add_option('-z', '--omega', default=1700*2*np.pi, help='passes the omega value', metavar='1700*2*np.pi')
 parser.add_option('-c', '--psic', default=-0.25, help='passes the psic value', metavar='=0.25')
 
 opts, args = parser.parse_args()
@@ -89,7 +89,7 @@ for eosname in eosnames:
 		def boundarycondition(omega): 
 			return np.abs(tov([mu,P,cs2i,Rho],rhoc,psic,omega,props,stp,numpts,maxr,tol)[-1])
 		
-		root = minimize_scalar(boundarycondition, bounds = (1000*2*np.pi,3000*2*np.pi), method = 'bounded')
+		root = minimize_scalar(boundarycondition, bounds = (1000*2*np.pi,3000*2*np.pi), method = 'bounded', options = {'maxiter': 1000, 'xatol': 1e-6})
 		
 		omega = root.x
 		
