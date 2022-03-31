@@ -10,6 +10,7 @@ from scipy.interpolate import interp1d
 from nsstruc.tov import tov
 from nsstruc.constants import *
 from nsstruc.pltsetup import *
+from scipy.optimize import minimize_scalar
 
 parser = OptionParser(usage=__usage__, description=__doc__)
 parser.add_option('-p', '--props', default='R,M,Lambda', help='comma-separated list of NS properties to calculate, DEFAULT=R,M,Lambda', metavar='R,M,Lambda')
@@ -82,6 +83,18 @@ for eosname in eosnames:
 	
 		macro = tov([mu,P,cs2i,Rho],rhoc,psic,omega,props,stp,numpts,maxr,tol)
 		properties[i] = [item for List in [[rhoc],macro] for item in List]
+		
+		def boundarycondition(omega): 
+			return np.abs(macro[-1])
+		
+		root = minimize_scalar(boundarycondition, bounds = (1000*2*np.pi,3000*2*np.pi), method = 'bounded')
+		
+		omega = root.x
+		
+		properties[i,-2] = omega
+		
+		properties[i,-1] = boundarycondition(omega)
+		
 		i = i+1
 
 	if verb == True: print 'Done at central density {0} g/cm^3\nSave to '.format(rhocs[-1])+outdir+tag+shortname+'.csv'
