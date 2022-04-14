@@ -88,7 +88,7 @@ for eosname in eosnames:
 		psic = psic + macro[-3]
 		
 		def boundarycondition(omega): 
-			return np.abs(tov([mu,P,cs2i,Rho],rhoc,psic,omega,props,stp,numpts,maxr,tol)[-1])
+			return (tov([mu,P,cs2i,Rho],rhoc,psic,omega,props,stp,numpts,maxr,tol)[-1])
 		
 		#root = minimize_scalar(boundarycondition, bounds = (1000*2*np.pi,3000*2*np.pi), method = 'bounded', options = {'maxiter': 100, 'xatol': 1e-3})
 		
