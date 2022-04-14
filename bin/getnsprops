@@ -11,6 +11,7 @@ from nsstruc.tov import tov
 from nsstruc.constants import *
 from nsstruc.pltsetup import *
 from scipy.optimize import minimize_scalar
+from scipy.optimize import root_scalar
 
 parser = OptionParser(usage=__usage__, description=__doc__)
 parser.add_option('-p', '--props', default='R,M,Lambda', help='comma-separated list of NS properties to calculate, DEFAULT=R,M,Lambda', metavar='R,M,Lambda')
@@ -89,7 +90,9 @@ for eosname in eosnames:
 		def boundarycondition(omega): 
 			return np.abs(tov([mu,P,cs2i,Rho],rhoc,psic,omega,props,stp,numpts,maxr,tol)[-1])
 		
-		root = minimize_scalar(boundarycondition, bounds = (1000*2*np.pi,3000*2*np.pi), method = 'bounded', options = {'maxiter': 100, 'xatol': 1e-3})
+		#root = minimize_scalar(boundarycondition, bounds = (1000*2*np.pi,3000*2*np.pi), method = 'bounded', options = {'maxiter': 100, 'xatol': 1e-3})
+		
+		root = root_scalar(boundarycondition, args=(), method='bisect', x0=1700*2*np.pi)
 		
 		omega = root.x
 		
