@@ -103,7 +103,7 @@ for eosname in eosnames:
 		
 		properties[i,-1] = boundarycondition(omega)
 		
-		i = i+1
+		i = i+1 
 
 	if verb == True: print 'Done at central density {0} g/cm^3\nSave to '.format(rhocs[-1])+outdir+tag+shortname+'.csv'
 	np.savetxt(outfile,properties,delimiter=',')
