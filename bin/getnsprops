@@ -92,11 +92,10 @@ for eosname in eosnames:
 		
 		#root = minimize_scalar(boundarycondition, bounds = (1000*2*np.pi,3000*2*np.pi), method = 'bounded', options = {'maxiter': 100, 'xatol': 1e-3})
 		
-		root1 = root_scalar(boundarycondition, args=(), method='newton', x0=1700*2*np.pi) 
+		root1 = root_scalar(boundarycondition, args=(), method='secant', x0=1700*2*np.pi, x1=3000*2*np.pi) 
 				    
 		#bracket=(1000*2*np.pi,3000*2*np.pi))
 		
-		#
 		
 		omega = root1.root
 		
