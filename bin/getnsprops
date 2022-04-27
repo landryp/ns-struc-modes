@@ -51,7 +51,7 @@ psic = float(opts.psic)
 for eosname in eosnames:
 
 	shortname = (eosname.split('.')[0]).split('eos-')[-1]
-	if verb == True: print 'Calculate properties of '+str(shortname)+' stars'
+	if verb == True: print('Calculate properties of '+str(shortname)+' stars')
 
 	eospath = indir+eosname
 	outfile = open(outdir+tag+shortname+".csv","w")
@@ -79,7 +79,7 @@ for eosname in eosnames:
 	properties = np.zeros((numrhoc,numprops+1))
 	
 	i = 0
-	if verb == True: print 'Start at central density {0} g/cm^3'.format(rhocs[0])
+	if verb == True: print('Start at central density {0} g/cm^3'.format(rhocs[0]))
 	for rhoc in rhocs: # compute macroscopic properties for star of each central density
 	
 		macro = tov([mu,P,cs2i,Rho],rhoc,psic,omega,props,stp,numpts,maxr,tol)
@@ -105,5 +105,5 @@ for eosname in eosnames:
 		
 		i = i+1 
 
-	if verb == True: print 'Done at central density {0} g/cm^3\nSave to '.format(rhocs[-1])+outdir+tag+shortname+'.csv'
+	if verb == True: print('Done at central density {0} g/cm^3\nSave to '.format(rhocs[-1])+outdir+tag+shortname+'.csv')
 	np.savetxt(outfile,properties,delimiter=',')
